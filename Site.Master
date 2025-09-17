@@ -12,12 +12,11 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
 </head>
-<body>
-    <form runat="server">
+<body class="d-flex flex-column min-vh-100">
+    <form runat="server" class="d-flex flex-column flex-grow-1">
         <asp:ScriptManager runat="server">
             <Scripts>
                 <%--Framework Scripts--%>
@@ -43,26 +42,34 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/About">About</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact">Contact</a></li>
-                    </ul>
-                </div>
+
+                <asp:PlaceHolder ID="navMenu" runat="server" Visible="false">
+                    <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" runat="server" href="~/About">About</a></li>
+                            <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </asp:PlaceHolder>
             </div>
         </nav>
-        <div class="container body-content">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
-            </asp:ContentPlaceHolder>
-            <hr />
-            <footer>
-                <p> &copy; <%: DateTime.Now.Year %> - EnglishUp</p>
+
+        <div class="container body-content flex-grow-1 d-flex flex-column">
+            <main class="flex-grow-1 d-flex flex-column align-items-center justify-content-center">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </main>
+            <footer class="py-3 mt-auto text-center">
+                <hr />
+                <p>&copy; <%: DateTime.Now.Year %> - EnglishUp</p>
             </footer>
         </div>
+
+
     </form>
     <asp:PlaceHolder runat="server">
-         <%: Scripts.Render("~/Scripts/bootstrap.bundle.min.js") %>
+        <%: Scripts.Render("~/Scripts/bootstrap.bundle.min.js") %>
     </asp:PlaceHolder>
 </body>
 </html>

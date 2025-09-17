@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using EnglishUp.Util;
+using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -11,7 +9,21 @@ namespace EnglishUp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Login1.Authenticate += LoginUser;
+        }
 
+        protected void LoginUser(object sender, AuthenticateEventArgs e)
+        {
+            string username = Login1.UserName;
+            string password = Login1.Password;
+
+            bool isValid = AuthHelper.Login(username, password); // example helper
+            e.Authenticated = isValid;
+
+            if (isValid)
+            {
+                Response.Redirect("~/About.aspx");
+            }
         }
     }
 }
